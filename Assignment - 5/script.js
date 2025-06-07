@@ -31,7 +31,7 @@ const showHome = () => {
   let str = `
     <h1>Welcome ${user.name}</h1>
     <hr>
-    <p><select>
+    <p><select id = "select_option">
      <option value=0>--select--</option>
       <option value=1>Deposit</option>
       <option value=2>Withdraw</option>
@@ -39,7 +39,7 @@ const showHome = () => {
       <p>
       <input type='number' id='txtAmount'>
       </p>
-      <p><button>Submit</button>
+      <p><button onclick='submit()'>Submit</button>
 
     <button onclick='showLogin()'>Logout</button>
     <hr>
@@ -71,3 +71,20 @@ const validateUser = () => {
     dvMsg.innerHTML = "Access Denied";
   }
 };
+
+const submit = () => {
+  let op = document.getElementById("select_option");
+  let inp = document.getElementById("txtAmount");
+  console.log(inp.value, op.value)
+  if (op.value === "1"){
+    if (inp.value > 0){
+      user.balance += Number(inp.value);
+    }
+  }
+  else if (op.value === "2"){
+    if (inp.value > 0){
+      user.balance -= Number(inp.value);
+    }
+  }
+  showHome();
+}
